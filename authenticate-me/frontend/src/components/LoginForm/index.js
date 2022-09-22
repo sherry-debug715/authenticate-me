@@ -22,6 +22,12 @@ function LoginForm({setShowLogInModal}) {
     );
   };
 
+  const handleDemoUserLogin = e => {
+    e.preventDefault();
+    return dispatch(sessionActions.login({credential: 'Demo-lition', password:'password'}))
+    .then(setShowLogInModal(false))
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <ul>
@@ -48,6 +54,7 @@ function LoginForm({setShowLogInModal}) {
         />
       </label>
       <button type="submit">Log In</button>
+      <button onClick={handleDemoUserLogin}>Demo User</button>
     </form>
   );
 }
