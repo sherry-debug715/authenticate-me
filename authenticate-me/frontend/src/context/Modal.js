@@ -7,6 +7,7 @@ const ModalContext = React.createContext();
 export function ModalProvider({ children }) {
   const modalRef = useRef();
   const [value, setValue] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setValue(modalRef.current);
@@ -22,8 +23,10 @@ export function ModalProvider({ children }) {
   );
 }
 
+export const usePortalContext = () => useContext(ModalContext);
+
 export function Modal({ onClose, children }) {
-  const modalNode = useContext(ModalContext);
+  const modalNode = usePortalContext();
   if (!modalNode) return null;
 
   return ReactDOM.createPortal(
